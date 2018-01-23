@@ -3,12 +3,8 @@ package pl.coderslab.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,17 +14,16 @@ import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 
 /**
- * Servlet implementation class home
+ * Servlet implementation class SolutionDetails
  */
-//@WebServlet("/")
-@WebServlet(urlPatterns = "/", initParams={@WebInitParam(name = "numberSolutions", value = "5") }) //- parametr umieszczamy w deskryptorze wdrożenia (web.xml) ale gdybyśmy robili to w adnotacjach to tak by to wyglądało
-public class Home extends HttpServlet {
+@WebServlet("/solutionDetails")
+public class SolutionDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public SolutionDetails() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,26 +33,19 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String numberSolutions = getInitParameter("numberSolutions");
-//		System.out.println(numberSolutions);
-		request.setAttribute("numberSolutions", numberSolutions);
+		int id = Integer.parseInt(request.getParameter("id"));
 		
-	
 		Connection conn = null;;
 		try {
 			conn = DbUtil.getConn();
-			Solution[] solutions = Solution.loadAllSolutions(conn, Integer.parseInt(numberSolutions));
-			request.setAttribute("solutions", solutions);
+			Solution solution = Solution.loadSolutionById(conn, id);
+			request.setAttribute("solution", solution);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
-
-		
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response); 
-
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/solutionDetails.jsp").forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

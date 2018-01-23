@@ -6,30 +6,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Strona główna</title>
+<title>Użytkownicy w grupie</title>
 </head>
 <body>
-<h1>To jest widok strony głównej</h1>
+<h1>Oto wszyscy użytkownicy w grupie</h1>
 
 <table>
 <tr>
-<td>id</td>
-<td>created</td>
-<td>updated</td>
-<td>description</td>
-<td>exercise_id</td>
-<td>users_id</td>
+<td>Imię</td>
+<td>Akcje</td>
 </tr>
 
-<c:forEach items="${solutions}" var="solution">
+<c:forEach items="${users}" var="user">
 <tr>
-<td>${solution.id}</td>
-<td>${solution.created}</td>
-<td>${solution.updated}</td>
-<td>${solution.description}</td>
-<td>${solution.exercise_id}</td>
-<td>${solution.users_id}</td>
-<td><a href="solutionDetails?id=${solution.id}">Szczegóły rozwiązania</a></td>
+<td>${user.username}</td>
+<td><a href="userDetails?id=${solution.id}">Szczegóły</a></td>
 </tr>
 </c:forEach>
 
