@@ -14,16 +14,16 @@ import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.UserGroup;
 
 /**
- * Servlet implementation class Groups
+ * Servlet implementation class AdminPanelGroups
  */
-@WebServlet("/groups")
-public class Groups extends HttpServlet {
+@WebServlet("/adminPanel/groups")
+public class AdminPanelGroups extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Groups() {
+    public AdminPanelGroups() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,8 @@ public class Groups extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groups.jsp").forward(request, response);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminPanelGroups.jsp").forward(request, response);
 	}
 
 	/**

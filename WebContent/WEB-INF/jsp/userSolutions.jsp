@@ -6,36 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Strona główna</title>
+<title>Rozwiązania użytkownika</title>
 </head>
 <body>
-<h1>To jest widok strony głównej - pokazuje 5 najnowszych rozwiązań</h1>
+<h1>To jest widok rozwiązań użytkownika</h1>
+
+<h3>Dane użytkownika:</h3>
+<h4>Nazwa: ${user.username}</h4>
+<h4>Email: ${user.email}</h4>
+
+<h3>Wszystkie rozwiązania dodane przez użytkownika:</h3>
 
 <table>
-<tr>
-<td>id</td>
-<td>created</td>
-<td>updated</td>
-<td>description</td>
-<td>exercise_id</td>
-<td>users_id</td>
-</tr>
-
 <c:forEach items="${solutions}" var="solution">
 <tr>
-<td>${solution.id}</td>
-<td>${solution.created}</td>
-<td>${solution.updated}</td>
-<td>${solution.description}</td>
-<td>${solution.exercise_id}</td>
-<td>${solution.users_id}</td>
+<td>Numer zadania: ${solution.exercise_id}</td>
+<td>Data dodania: ${solution.created}</td>
 <td><a href="solutionDetails?id=${solution.id}">Szczegóły rozwiązania</a></td>
 </tr>
 </c:forEach>
 
 </table>
-
-
 
 </body>
 </html>

@@ -6,27 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Użytkownicy w grupie</title>
+<title>Panel administratora - grupy</title>
 </head>
 <body>
-<h1>Oto wszyscy użytkownicy w grupie</h1>
+<h1>Panel administratora - edycja grupy</h1>
+<h3>${message}</h3>
 
-<table>
-<tr>
-<td>Imię</td>
-<td>Akcje</td>
-</tr>
+<form method="post">
+<input type="text" name ="groupName" value="${group.groupName}"><br><br>
+<input type="hidden" name="id" value="${group.id}">
+<input type="submit" value="${buttonMessage}">
 
-<c:forEach items="${users}" var="user">
-<tr>
-<td>${user.username}</td>
-<td><a href="userSolutions?id=${user.id}">Pokaż rozwiązania tego użytkownika</a></td>
-</tr>
-</c:forEach>
-
-</table>
-
-
+</form>
 
 </body>
 </html>

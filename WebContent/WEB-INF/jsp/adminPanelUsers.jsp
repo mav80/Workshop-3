@@ -6,28 +6,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Użytkownicy w grupie</title>
+<title>Panel administratora - użytkownicy</title>
 </head>
 <body>
-<h1>Oto wszyscy użytkownicy w grupie</h1>
-
+<h1>Panel administratora - użytkownicy</h1>
 <table>
 <tr>
-<td>Imię</td>
+<td>Nazwa użytkownika</td>
+<td>Email</td>
+<td>Numer grupy do której należy</td>
 <td>Akcje</td>
 </tr>
 
 <c:forEach items="${users}" var="user">
 <tr>
 <td>${user.username}</td>
-<td><a href="userSolutions?id=${user.id}">Pokaż rozwiązania tego użytkownika</a></td>
+<td>${user.email}</td>
+<td>${user.person_group_id}</td>
+<td><a href="usersEdit?id=${user.id}">Edytuj</a></td>
+<td><a href="usersDelete?id=${user.id}">Usuń</a></td>
 </tr>
 </c:forEach>
 
 </table>
 
-
-
+<br><a href="usersEdit?id=-1">Utwórz nowego użytkownika</a>
 </body>
 </html>
 <%@ include file="fragments/footer.jsp"%>

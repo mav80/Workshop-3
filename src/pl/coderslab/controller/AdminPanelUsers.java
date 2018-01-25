@@ -11,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.model.DbUtil;
+import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
 
 /**
- * Servlet implementation class Groups
+ * Servlet implementation class AdminPanelUsers
  */
-@WebServlet("/groups")
-public class Groups extends HttpServlet {
+@WebServlet("/adminPanel/users")
+public class AdminPanelUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Groups() {
+    public AdminPanelUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +33,18 @@ public class Groups extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			UserGroup[] groups = UserGroup.loadAllGroups(conn);
-			request.setAttribute("groups", groups);
+			User[] users = User.loadAllUsers(conn);
+			request.setAttribute("users", users);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groups.jsp").forward(request, response);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminPanelUsers.jsp").forward(request, response);
 	}
 
 	/**

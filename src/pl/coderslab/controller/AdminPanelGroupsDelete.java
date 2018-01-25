@@ -14,16 +14,16 @@ import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.UserGroup;
 
 /**
- * Servlet implementation class Groups
+ * Servlet implementation class AdminPanelGroupsDelete
  */
-@WebServlet("/groups")
-public class Groups extends HttpServlet {
+@WebServlet("/adminPanel/groupsDelete")
+public class AdminPanelGroupsDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Groups() {
+    public AdminPanelGroupsDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,18 @@ public class Groups extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Connection conn = null;
 		try {
-			conn = DbUtil.getConn();
-			UserGroup[] groups = UserGroup.loadAllGroups(conn);
-			request.setAttribute("groups", groups);
+			int id = Integer.parseInt(request.getParameter("id"));
+			Connection conn = DbUtil.getConn();
+			UserGroup group = UserGroup.loadGroupById(conn, id);
+			group.groupDelete(conn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groups.jsp").forward(request, response);
+		
+		response.sendRedirect("groups");
+		
 	}
 
 	/**

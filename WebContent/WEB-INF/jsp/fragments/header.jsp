@@ -9,9 +9,9 @@
 <body>
 <header>
 
-<a href="/Warsztaty3">Strona główna</a>
-<a href="groups">Grupy</a>
-<a href="admin">Panel administratora</a>
+<a href="<%out.print(request.getContextPath());%>">Strona główna</a>
+<a href="<%out.print(request.getContextPath());%>/groups">Grupy</a>
+<a href="<%out.print(request.getContextPath());%>/adminPanel">Panel administratora</a>
 
 </header>
 

@@ -45,7 +45,8 @@ public class GroupUsers extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groupUsers.jsp").forward(request, response);}
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groupUsers.jsp").forward(request, response);
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.model.DbUtil;
+import pl.coderslab.model.Solution;
+import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
 
 /**
- * Servlet implementation class Groups
+ * Servlet implementation class UserSolutions
  */
-@WebServlet("/groups")
-public class Groups extends HttpServlet {
+@WebServlet("/userSolutions")
+public class UserSolutions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Groups() {
+    public UserSolutions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +35,21 @@ public class Groups extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Connection conn = null;
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Connection conn = null;;
 		try {
 			conn = DbUtil.getConn();
-			UserGroup[] groups = UserGroup.loadAllGroups(conn);
-			request.setAttribute("groups", groups);
+			User user = User.loadUserById(conn, id);
+			request.setAttribute("user", user);
+			Solution[] solutions = Solution.loadAllByUserId(conn, id);
+			request.setAttribute("solutions", solutions);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groups.jsp").forward(request, response);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/userSolutions.jsp").forward(request, response);
 	}
 
 	/**
