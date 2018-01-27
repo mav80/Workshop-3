@@ -64,7 +64,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("8859_2"); //bez tego brak polskich znaków!
+		request.setCharacterEncoding("8859_2"); //bez tego brak polskich znaków w odebranych z formularza danych!
 		int id = Integer.parseInt(request.getParameter("id"));
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");

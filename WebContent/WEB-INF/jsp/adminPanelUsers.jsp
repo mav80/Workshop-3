@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=8859_2"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="fragments/header.jsp"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Panel administratora - u≈ºytkownicy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<title>Panel administratora - uøytkownicy</title>
 </head>
 <body>
-<h1>Panel administratora - u≈ºytkownicy</h1>
+<h1>Panel administratora - uøytkownicy</h1>
 <table>
 <tr>
-<td>Nazwa u≈ºytkownika</td>
+<td>Nazwa uøytkownika</td>
 <td>Email</td>
-<td>Numer grupy do kt√≥rej nale≈ºy</td>
+<td>Numer grupy do ktÛrej naleøy</td>
 <td>Akcje</td>
 </tr>
 
@@ -24,13 +24,13 @@
 <td>${user.email}</td>
 <td>${user.person_group_id}</td>
 <td><a href="usersEdit?id=${user.id}">Edytuj</a></td>
-<td><a href="usersDelete?id=${user.id}">Usu≈Ñ</a></td>
+<td><a href="usersDelete?id=${user.id}">UsuÒ</a></td>
 </tr>
 </c:forEach>
 
 </table>
 
-<br><a href="usersEdit?id=-1">Utw√≥rz nowego u≈ºytkownika</a>
+<br><a href="usersEdit?id=-1">UtwÛrz nowego uøytkownika</a>
 </body>
 </html>
 <%@ include file="fragments/footer.jsp"%>

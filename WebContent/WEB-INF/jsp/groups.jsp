@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=8859_2"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="fragments/header.jsp"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Widok grup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
 </head>
 <body>
-<h1>Oto wszystkie znajdujÄ…ce siÄ™ w bazie grupy:</h1>
+<h1>Oto wszystkie znajduj±ce siê w bazie grupy:</h1>
 
 <table>
 <tr>
@@ -20,7 +19,7 @@
 <c:forEach items="${groups}" var="group">
 <tr>
 <td>${group.groupName}</td>
-<td><a href="groupUsers?id=${group.id}">UÅ¼ytkownicy</a></td>
+<td><a href="groupUsers?id=${group.id}">U¿ytkownicy</a></td>
 </tr>
 </c:forEach>
 

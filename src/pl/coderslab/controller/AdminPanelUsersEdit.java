@@ -63,6 +63,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("8859_2"); //bez tego brak polskich znaków w odebranych z formularza danych!
 		int id = Integer.parseInt(request.getParameter("id"));
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
