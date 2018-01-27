@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.SolutionDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 
@@ -46,7 +47,7 @@ public class Home extends HttpServlet {
 		Connection conn = null;;
 		try {
 			conn = DbUtil.getConn();
-			Solution[] solutions = Solution.loadAllSolutions(conn, Integer.parseInt(numberSolutions));
+			Solution[] solutions = SolutionDAO.loadAllSolutions(conn, Integer.parseInt(numberSolutions));
 			request.setAttribute("solutions", solutions);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

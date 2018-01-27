@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.ExerciseDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Exercise;
 import pl.coderslab.model.User;
@@ -40,7 +41,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			Exercise exercise = Exercise.loadExerciseById(conn, id);
+			Exercise exercise = ExerciseDAO.loadExerciseById(conn, id);
 			request.setAttribute("exercise", exercise);
 			if(id > -1 && exercise != null) {
 				request.setAttribute("message", "Edytujesz zadanie o nazwie " + exercise.getDescription() + ".");
@@ -63,6 +64,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("8859_2"); //bez tego brak polskich znaków!
 		int id = Integer.parseInt(request.getParameter("id"));
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
@@ -73,10 +75,11 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 		if(id > -1) {
 			try {
 				conn = DbUtil.getConn();
-				Exercise exercise = Exercise.loadExerciseById(conn, id);
+				Exercise exercise = ExerciseDAO.loadExerciseById(conn, id);
 				exercise.setDescription(description);
+				//exercise.setDescription("ąćę test polskich znaków łśńźż");
 				exercise.setTitle(title);
-				exercise.addExerciseToDB(conn);
+				ExerciseDAO.addExerciseToDB(conn, exercise);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,7 +91,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 				Exercise exercise = new Exercise();
 				exercise.setDescription(description);
 				exercise.setTitle(title);
-				exercise.addExerciseToDB(conn);
+				ExerciseDAO.addExerciseToDB(conn, exercise);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

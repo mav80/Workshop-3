@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.ExerciseDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Exercise;
 import pl.coderslab.model.User;
@@ -38,8 +39,8 @@ public class AdminPanelExercisesDelete extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			Connection conn = DbUtil.getConn();
-			Exercise exercise = Exercise.loadExerciseById(conn, id);
-			exercise.exerciseDelete(conn);
+			Exercise exercise = ExerciseDAO.loadExerciseById(conn, id);
+			ExerciseDAO.exerciseDelete(conn, exercise);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

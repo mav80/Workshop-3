@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.UserGroupDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.UserGroup;
 
@@ -36,8 +37,8 @@ public class AdminPanelGroupsDelete extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			Connection conn = DbUtil.getConn();
-			UserGroup group = UserGroup.loadGroupById(conn, id);
-			group.groupDelete(conn);
+			UserGroup group = UserGroupDAO.loadGroupById(conn, id);
+			UserGroupDAO.groupDelete(conn, group);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

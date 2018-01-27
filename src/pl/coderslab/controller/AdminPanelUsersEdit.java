@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.UserDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
@@ -39,7 +40,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			User user = User.loadUserById(conn, id);
+			User user = UserDAO.loadUserById(conn, id);
 			request.setAttribute("user", user);
 			if(id > -1 && user != null) {
 				request.setAttribute("message", "Edytujesz użytkownika o nazwie " + user.getUsername() + ".");
@@ -74,12 +75,12 @@ public class AdminPanelUsersEdit extends HttpServlet {
 		if(id > -1) {
 			try {
 				conn = DbUtil.getConn();
-				User user = User.loadUserById(conn, id);
+				User user = UserDAO.loadUserById(conn, id);
 				user.setUsername(username);
 				user.setEmail(email);
 				user.setPassword(password);
 				user.setPerson_group_id(person_group_id);
-				user.saveToDB(conn);
+				UserDAO.saveToDB(conn, user);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,7 +94,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 				user.setEmail(email);
 				user.setPassword(password);
 				user.setPerson_group_id(person_group_id);
-				user.saveToDB(conn);
+				UserDAO.saveToDB(conn, user);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

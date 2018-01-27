@@ -1,9 +1,6 @@
-package pl.coderslab.model;
+package pl.coderslab.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class TestDb
+ * Servlet implementation class showSolutions
  */
-@WebServlet("/testdb")
-public class TestDb extends HttpServlet {
+@WebServlet("/solution/all")
+public class showSolutions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestDb() {
+    public showSolutions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +26,7 @@ public class TestDb extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		try {
-			Connection conn = DbUtil.getConn();
-			
-			response.getWriter().append("Hurra, baza działa!");
-		} catch (SQLException e) {
-			response.getWriter().append("Nie działa.");
-			e.printStackTrace();
-		}
+
 	}
 
 	/**

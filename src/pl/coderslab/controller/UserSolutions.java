@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.SolutionDAO;
+import pl.coderslab.dao.UserDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 import pl.coderslab.model.User;
@@ -40,9 +42,9 @@ public class UserSolutions extends HttpServlet {
 		Connection conn = null;;
 		try {
 			conn = DbUtil.getConn();
-			User user = User.loadUserById(conn, id);
+			User user = UserDAO.loadUserById(conn, id);
 			request.setAttribute("user", user);
-			Solution[] solutions = Solution.loadAllByUserId(conn, id);
+			Solution[] solutions = SolutionDAO.loadAllByUserId(conn, id);
 			request.setAttribute("solutions", solutions);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

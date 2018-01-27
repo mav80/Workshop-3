@@ -6,7 +6,7 @@
 	username="root"
 	password="coderslab"
 	driverClassName="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/CodingSchool?useSSL=false&amp;characterEncoding=utf-8"
+	url="jdbc:mysql://localhost:3306/CodingSchool?characterEncoding=utf-8&amp;useSSL=false"
 	maxTotal="1000"
 	maxIdle="30"
 	maxWaitMillis="10000" />

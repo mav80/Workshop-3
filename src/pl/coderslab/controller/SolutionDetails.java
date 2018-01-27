@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.SolutionDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 
@@ -38,7 +39,7 @@ public class SolutionDetails extends HttpServlet {
 		Connection conn = null;;
 		try {
 			conn = DbUtil.getConn();
-			Solution solution = Solution.loadSolutionById(conn, id);
+			Solution solution = SolutionDAO.loadSolutionById(conn, id);
 			request.setAttribute("solution", solution);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

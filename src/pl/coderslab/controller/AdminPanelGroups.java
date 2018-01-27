@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.UserGroupDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.UserGroup;
 
@@ -36,7 +37,7 @@ public class AdminPanelGroups extends HttpServlet {
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			UserGroup[] groups = UserGroup.loadAllGroups(conn);
+			UserGroup[] groups = UserGroupDAO.loadAllGroups(conn);
 			request.setAttribute("groups", groups);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

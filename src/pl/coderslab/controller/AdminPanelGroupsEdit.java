@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.UserGroupDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.UserGroup;
 
@@ -38,7 +39,7 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			UserGroup group = UserGroup.loadGroupById(conn, id);
+			UserGroup group = UserGroupDAO.loadGroupById(conn, id);
 			request.setAttribute("group", group);
 			if(id > -1 && group != null) {
 				request.setAttribute("message", "Edytujesz grupę o nazwie " + group.getGroupName() + ".");
@@ -71,9 +72,9 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 		if(id > -1) {
 			try {
 				conn = DbUtil.getConn();
-				UserGroup group = UserGroup.loadGroupById(conn, id);
+				UserGroup group = UserGroupDAO.loadGroupById(conn, id);
 				group.setGroupName(groupName);
-				group.addGroupToDB(conn);
+				UserGroupDAO.addGroupToDB(conn, group);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,7 +85,7 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 				conn = DbUtil.getConn();
 				UserGroup group = new UserGroup();
 				group.setGroupName(groupName);
-				group.addGroupToDB(conn);
+				UserGroupDAO.addGroupToDB(conn, group);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
