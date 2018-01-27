@@ -6,15 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Panel administratora - grupy</title>
+<title>Panel administratora - zadania</title>
 </head>
 <body>
-<h1>Panel administratora - edycja grupy</h1>
+<h1>Panel administratora - edycja zadania</h1>
 <h3>${message}</h3>
 
 <form method="post">
-Nazwa grupy: <input type="text" name ="groupName" value="${group.groupName}"><br><br>
-<input type="hidden" name="id" value="${group.id}">
+Tytuł zadania: <input type="text" name ="title" value="${exercise.title}"><br><br>
+Opis zadania: <input type="text" name ="description" value="${exercise.description}"><br><br>
+<input type="hidden" name="id" value="${exercise.id}">
 <input type="submit" value="${buttonMessage}">
 
 </form>

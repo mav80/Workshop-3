@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.model.DbUtil;
+import pl.coderslab.model.Exercise;
 import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class AdminPanelUsersEdit
  */
-@WebServlet("/adminPanel/usersEdit")
-public class AdminPanelUsersEdit extends HttpServlet {
+@WebServlet("/adminPanel/exercisesEdit")
+public class AdminPanelExercisesEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPanelUsersEdit() {
+    public AdminPanelExercisesEdit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,14 +40,14 @@ public class AdminPanelUsersEdit extends HttpServlet {
 		Connection conn = null;
 		try {
 			conn = DbUtil.getConn();
-			User user = User.loadUserById(conn, id);
-			request.setAttribute("user", user);
-			if(id > -1 && user != null) {
-				request.setAttribute("message", "Edytujesz użytkownika o nazwie " + user.getUsername() + ".");
+			Exercise exercise = Exercise.loadExerciseById(conn, id);
+			request.setAttribute("exercise", exercise);
+			if(id > -1 && exercise != null) {
+				request.setAttribute("message", "Edytujesz zadanie o nazwie " + exercise.getDescription() + ".");
 				request.setAttribute("buttonMessage", "Zapisz zmiany");
 			} else {
-				request.setAttribute("message", "Tworzysz nowego użytkownika.");
-				request.setAttribute("buttonMessage", "Stwórz nowego użytkownika");
+				request.setAttribute("message", "Tworzysz nowe zadanie.");
+				request.setAttribute("buttonMessage", "Stwórz nowe zadanie");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +56,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 		
 
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/usersEdit.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/exercisesEdit.jsp").forward(request, response);
 	}
 
 	/**
@@ -63,23 +64,19 @@ public class AdminPanelUsersEdit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String username = request.getParameter("username");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		int person_group_id = Integer.parseInt(request.getParameter("person_group_id"));
-		System.out.println("Odebrane dane w POST: id = " + id + " nazwa usera: " + username + ", id grupy: " + person_group_id + ", email: " + email + ", password: " + password);
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
+		System.out.println("Odebrane dane w POST: id = " + id + " nazwa zadania: " + title + ", opis zadania: " + description);
 		
 		Connection conn = null;
 		
 		if(id > -1) {
 			try {
 				conn = DbUtil.getConn();
-				User user = User.loadUserById(conn, id);
-				user.setUsername(username);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setPerson_group_id(person_group_id);
-				user.saveToDB(conn);
+				Exercise exercise = Exercise.loadExerciseById(conn, id);
+				exercise.setDescription(description);
+				exercise.setTitle(title);
+				exercise.addExerciseToDB(conn);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,12 +85,10 @@ public class AdminPanelUsersEdit extends HttpServlet {
 			
 			try {
 				conn = DbUtil.getConn();
-				User user = new User();
-				user.setUsername(username);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setPerson_group_id(person_group_id);
-				user.saveToDB(conn);
+				Exercise exercise = new Exercise();
+				exercise.setDescription(description);
+				exercise.setTitle(title);
+				exercise.addExerciseToDB(conn);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,7 +96,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 			
 		}
 		
-		response.sendRedirect("users"); 
+		response.sendRedirect("exercises"); 
 	}
 
 }
