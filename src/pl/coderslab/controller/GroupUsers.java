@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.User;
+import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class GroupUsers
@@ -39,7 +40,9 @@ public class GroupUsers extends HttpServlet {
 		try {
 			conn = DbUtil.getConn();
 			User[] users = User.loadAllByGrupId(conn, id);
+			UserGroup group = UserGroup.loadGroupById(conn, id);
 			request.setAttribute("users", users);
+			request.setAttribute("groupName", group.getGroupName());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

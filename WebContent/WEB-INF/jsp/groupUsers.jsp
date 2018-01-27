@@ -9,7 +9,7 @@
 <title>Użytkownicy w grupie</title>
 </head>
 <body>
-<h1>Oto wszyscy użytkownicy w grupie</h1>
+<h1>Oto wszyscy użytkownicy grupy ${groupName}</h1>
 
 <table>
 <tr>
