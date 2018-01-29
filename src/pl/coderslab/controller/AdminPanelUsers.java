@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.coderslab.dao.UserDAO;
+import pl.coderslab.dao.UserGroupDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.User;
 import pl.coderslab.model.UserGroup;
@@ -40,10 +41,22 @@ public class AdminPanelUsers extends HttpServlet {
 			conn = DbUtil.getConn();
 			User[] users = UserDAO.loadAllUsers(conn);
 			request.setAttribute("users", users);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			conn = DbUtil.getConn();
+			UserGroup[] groups = UserGroupDAO.loadAllGroups(conn);
+			request.setAttribute("groups", groups);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminPanelUsers.jsp").forward(request, response);
 	}

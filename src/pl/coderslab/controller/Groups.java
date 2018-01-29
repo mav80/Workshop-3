@@ -39,10 +39,12 @@ public class Groups extends HttpServlet {
 			conn = DbUtil.getConn();
 			UserGroup[] groups = UserGroupDAO.loadAllGroups(conn);
 			request.setAttribute("groups", groups);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groups.jsp").forward(request, response);
 	}
 

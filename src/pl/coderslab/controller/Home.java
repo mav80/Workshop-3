@@ -3,10 +3,7 @@ package pl.coderslab.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.ExerciseDAO;
 import pl.coderslab.dao.SolutionDAO;
+import pl.coderslab.dao.UserDAO;
 import pl.coderslab.model.DbUtil;
+import pl.coderslab.model.Exercise;
 import pl.coderslab.model.Solution;
+import pl.coderslab.model.User;
 
 /**
  * Servlet implementation class home
@@ -49,13 +50,36 @@ public class Home extends HttpServlet {
 			conn = DbUtil.getConn();
 			Solution[] solutions = SolutionDAO.loadAllSolutions(conn, Integer.parseInt(numberSolutions));
 			request.setAttribute("solutions", solutions);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		
+		
+		//aby przy rozwiazaniu (solution) wyświetlić jego autora (user) i tytuł zadania (exercise) muszę do widoku dodać listę users 
+		//i exercises
 
+		try {
+			conn = DbUtil.getConn();
+			//Solution[] solutions = SolutionDAO.loadAllSolutions(conn, Integer.parseInt(numberSolutions));
+			User[] users = UserDAO.loadAllUsers(conn);
+			request.setAttribute("users", users);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			conn = DbUtil.getConn();
+			Exercise[] exercises = ExerciseDAO.loadAllExercises(conn);
+			request.setAttribute("exercises", exercises);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response); 
 

@@ -15,16 +15,16 @@ import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Solution;
 
 /**
- * Servlet implementation class SolutionDetails
+ * Servlet implementation class SolutionEdit
  */
-@WebServlet("/solutionDetails")
-public class SolutionDetails extends HttpServlet {
+@WebServlet("/solutionEdit")
+public class SolutionEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SolutionDetails() {
+    public SolutionEdit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,16 +47,35 @@ public class SolutionDetails extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/jsp/solutionDetails.jsp").forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		getServletContext().getRequestDispatcher("/WEB-INF/jsp/solutionEdit.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("8859_2"); //bez tego brak polskich znaków w odebranych z formularza danych!
+		int id = Integer.parseInt(request.getParameter("id"));
+		String created = request.getParameter("created");
+		String updated = request.getParameter("updated");
+		String description = request.getParameter("description");
+		int exercise_id = Integer.parseInt(request.getParameter("exercise_id"));
+		int users_id = Integer.parseInt(request.getParameter("users_id"));
+		
+		Connection conn = null;
+		
+		try {
+			conn = DbUtil.getConn();
+			Solution solution = SolutionDAO.loadSolutionById(conn, id);
+			solution.setDescription(description);
+			SolutionDAO.saveSolutionToDB(conn, solution);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		response.sendRedirect("solutionDetails?id="+id); 
 	}
 
 }

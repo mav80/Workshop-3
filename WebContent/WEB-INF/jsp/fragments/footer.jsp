@@ -8,8 +8,9 @@
 <title>footer</title>
 </head>
 <body>
-<footer>
+<br>
+<menu>
   <h5>CodingSchool Project, email kontaktowy: <a href="mailto:biuro@codingschool.com">biuro@codingschool.com</a>.</h5>
-</footer>
+</menu>
 </body>
 </html>

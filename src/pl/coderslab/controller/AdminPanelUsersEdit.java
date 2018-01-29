@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.dao.UserDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.User;
-import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class AdminPanelUsersEdit
@@ -42,6 +41,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 			conn = DbUtil.getConn();
 			User user = UserDAO.loadUserById(conn, id);
 			request.setAttribute("user", user);
+			conn.close();
 			if(id > -1 && user != null) {
 				request.setAttribute("message", "Edytujesz użytkownika o nazwie " + user.getUsername() + ".");
 				request.setAttribute("buttonMessage", "Zapisz zmiany");
@@ -53,9 +53,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-		
+			
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/usersEdit.jsp").forward(request, response);
 	}
 
@@ -82,6 +80,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 				user.setPassword(password);
 				user.setPerson_group_id(person_group_id);
 				UserDAO.saveToDB(conn, user);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,6 +95,7 @@ public class AdminPanelUsersEdit extends HttpServlet {
 				user.setPassword(password);
 				user.setPerson_group_id(person_group_id);
 				UserDAO.saveToDB(conn, user);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

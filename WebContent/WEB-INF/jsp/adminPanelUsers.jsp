@@ -11,18 +11,26 @@
 <body>
 <h1>Panel administratora - u¿ytkownicy</h1>
 <table>
+<thead>
 <tr>
-<td>Nazwa u¿ytkownika</td>
-<td>Email</td>
-<td>Numer grupy do której nale¿y</td>
-<td>Akcje</td>
+<th>Nazwa u¿ytkownika</th>
+<th>Email</th>
+<th>Grupa której nale¿y</th>
+<th colspan="2">Akcje</th>
 </tr>
-
+</thead>
 <c:forEach items="${users}" var="user">
 <tr>
 <td>${user.username}</td>
 <td>${user.email}</td>
-<td>${user.person_group_id}</td>
+
+
+<c:forEach items="${groups}" var="group">
+	<c:if test="${group.id == user.person_group_id}">
+		<td>${group.groupName}</td>
+	</c:if>
+</c:forEach>
+
 <td><a href="usersEdit?id=${user.id}">Edytuj</a></td>
 <td><a href="usersDelete?id=${user.id}">Usuñ</a></td>
 </tr>

@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.dao.ExerciseDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Exercise;
-import pl.coderslab.model.User;
-import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class AdminPanelUsers
@@ -41,6 +39,7 @@ public class AdminPanelExercises extends HttpServlet {
 			conn = DbUtil.getConn();
 			Exercise[] exercises = ExerciseDAO.loadAllExercises(conn);
 			request.setAttribute("exercises", exercises);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

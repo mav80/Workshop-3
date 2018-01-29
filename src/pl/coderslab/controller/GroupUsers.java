@@ -45,6 +45,7 @@ public class GroupUsers extends HttpServlet {
 			UserGroup group = UserGroupDAO.loadGroupById(conn, id);
 			request.setAttribute("users", users);
 			request.setAttribute("groupName", group.getGroupName());
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

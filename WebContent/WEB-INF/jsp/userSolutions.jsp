@@ -11,17 +11,27 @@
 <body>
 <h1>To jest widok rozwi±zañ u¿ytkownika</h1>
 
-<h3>Dane u¿ytkownika:</h3>
+<h2>Dane u¿ytkownika:</h3>
 <h4>Nazwa: ${user.username}</h4>
 <h4>Email: ${user.email}</h4>
 
 <h3>Wszystkie rozwi±zania dodane przez u¿ytkownika:</h3>
-
 <table>
+<tr>
+<th>Tytu³ zadania</th>
+<th>Data dodania rozwi±zania</th>
+<th >Akcje</th>
+</tr>
+
 <c:forEach items="${solutions}" var="solution">
 <tr>
-<td>Numer zadania: ${solution.exercise_id}</td>
-<td>Data dodania: ${solution.created}</td>
+<c:forEach items="${exercises}" var="exercise">
+	<c:if test="${solution.exercise_id == exercise.id}">
+		<td>${exercise.title}</td>
+	</c:if>
+
+</c:forEach>
+<td>${solution.created}</td>
 <td><a href="solutionDetails?id=${solution.id}">Szczegó³y rozwi±zania</a></td>
 </tr>
 </c:forEach>

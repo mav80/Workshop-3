@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.dao.UserDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.User;
-import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class AdminPanelUsersDelete
@@ -40,10 +39,14 @@ public class AdminPanelUsersDelete extends HttpServlet {
 			Connection conn = DbUtil.getConn();
 			User user = UserDAO.loadUserById(conn, id);
 			UserDAO.userDelete(conn, user);
+			conn.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 		response.sendRedirect("users");
 	}

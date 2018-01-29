@@ -40,6 +40,7 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 		try {
 			conn = DbUtil.getConn();
 			UserGroup group = UserGroupDAO.loadGroupById(conn, id);
+			conn.close();
 			request.setAttribute("group", group);
 			if(id > -1 && group != null) {
 				request.setAttribute("message", "Edytujesz grupę o nazwie " + group.getGroupName() + ".");
@@ -53,7 +54,6 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-
 		
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/groupsEdit.jsp").forward(request, response);
 	}
@@ -75,6 +75,7 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 				UserGroup group = UserGroupDAO.loadGroupById(conn, id);
 				group.setGroupName(groupName);
 				UserGroupDAO.addGroupToDB(conn, group);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -86,12 +87,15 @@ public class AdminPanelGroupsEdit extends HttpServlet {
 				UserGroup group = new UserGroup();
 				group.setGroupName(groupName);
 				UserGroupDAO.addGroupToDB(conn, group);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
+			
 		}
+		
 		
 		response.sendRedirect("groups"); 
 	}

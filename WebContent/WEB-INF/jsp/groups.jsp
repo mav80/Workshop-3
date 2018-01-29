@@ -12,8 +12,8 @@
 
 <table>
 <tr>
-<td>Nazwa grupy</td>
-<td>Akcje</td>
+<th>Nazwa grupy</th>
+<th>Akcje</th>
 </tr>
 
 <c:forEach items="${groups}" var="group">

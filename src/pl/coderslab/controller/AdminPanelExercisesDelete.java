@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.dao.ExerciseDAO;
 import pl.coderslab.model.DbUtil;
 import pl.coderslab.model.Exercise;
-import pl.coderslab.model.User;
-import pl.coderslab.model.UserGroup;
 
 /**
  * Servlet implementation class AdminPanelUsersDelete
@@ -41,10 +39,12 @@ public class AdminPanelExercisesDelete extends HttpServlet {
 			Connection conn = DbUtil.getConn();
 			Exercise exercise = ExerciseDAO.loadExerciseById(conn, id);
 			ExerciseDAO.exerciseDelete(conn, exercise);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		response.sendRedirect("exercises");
 	}

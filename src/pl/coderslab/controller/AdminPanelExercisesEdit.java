@@ -43,6 +43,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 			conn = DbUtil.getConn();
 			Exercise exercise = ExerciseDAO.loadExerciseById(conn, id);
 			request.setAttribute("exercise", exercise);
+			conn.close();
 			if(id > -1 && exercise != null) {
 				request.setAttribute("message", "Edytujesz zadanie o nazwie " + exercise.getDescription() + ".");
 				request.setAttribute("buttonMessage", "Zapisz zmiany");
@@ -54,8 +55,6 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 		
 		getServletContext().getRequestDispatcher("/WEB-INF/jsp/exercisesEdit.jsp").forward(request, response);
 	}
@@ -80,6 +79,7 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 				//exercise.setDescription("ąćę test polskich znaków łśńźż");
 				exercise.setTitle(title);
 				ExerciseDAO.addExerciseToDB(conn, exercise);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -92,10 +92,12 @@ public class AdminPanelExercisesEdit extends HttpServlet {
 				exercise.setDescription(description);
 				exercise.setTitle(title);
 				ExerciseDAO.addExerciseToDB(conn, exercise);
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			
 		}
 		

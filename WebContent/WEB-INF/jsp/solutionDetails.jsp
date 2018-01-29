@@ -10,7 +10,10 @@
 </head>
 <body>
 <h1>Szczegó³y rozwi±zania wybranego zadania:</h1>
-${solution.description}
+${solution.description}<br><br>
+
+<a href="solutionEdit?id=${solution.id}">Edytuj to rozwi±zanie</a>
+
 </body>
 </html>
 <%@ include file="fragments/footer.jsp"%>

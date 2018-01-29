@@ -9,32 +9,43 @@
 <title>Strona g³ówna</title>
 </head>
 <body>
-<h1>To jest widok strony g³ównej - pokazuje 5 najnowszych rozwi±zañ</h1>
+
+<h2>Strona g³ówna - 5 najnowszych rozwi±zañ</h2>
 
 <table>
+<thead>
 <tr>
-<td>id</td>
-<td>created</td>
-<td>updated</td>
-<td>description</td>
-<td>exercise_id</td>
-<td>users_id</td>
+<th>Tytu³ zadania</th>
+<th>Autor rozwi±zania</th>
+<th>Data dodania</th>
+<th>Akcje</th>
 </tr>
+</thead>
 
 <c:forEach items="${solutions}" var="solution">
 <tr>
-<td>${solution.id}</td>
+
+<c:forEach items="${exercises}" var="exercise">
+	<c:if test="${solution.exercise_id == exercise.id}">
+		<td>${exercise.title}</td>
+	</c:if>
+
+</c:forEach>
+
+
+
+<c:forEach items="${users}" var="user">
+	<c:if test="${solution.users_id == user.id}">
+		<td>${user.username}</td>
+	</c:if>
+</c:forEach>
+
 <td>${solution.created}</td>
-<td>${solution.updated}</td>
-<td>${solution.description}</td>
-<td>${solution.exercise_id}</td>
-<td>${solution.users_id}</td>
 <td><a href="solutionDetails?id=${solution.id}">Szczegó³y rozwi±zania</a></td>
 </tr>
 </c:forEach>
 
 </table>
-
 
 
 </body>

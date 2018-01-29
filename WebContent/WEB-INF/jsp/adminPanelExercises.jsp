@@ -12,9 +12,9 @@
 <h1>Panel administratora - zadania</h1>
 <table>
 <tr>
-<td>Nazwa zadania</td>
-<td>Opis zadania</td>
-<td>Akcje</td>
+<th>Nazwa zadania</th>
+<th>Opis zadania</th>
+<th colspan="2">Akcje</th>
 </tr>
 
 <c:forEach items="${exercises}" var="exercise">

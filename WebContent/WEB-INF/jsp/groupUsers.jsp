@@ -13,14 +13,14 @@
 
 <table>
 <tr>
-<td>Imiê</td>
-<td>Akcje</td>
+<th>Imiê</th>
+<th>Akcje</th>
 </tr>
 
 <c:forEach items="${users}" var="user">
 <tr>
 <td>${user.username}</td>
-<td><a href="userSolutions?id=${user.id}">Poka¿ rozwi±zania tego u¿ytkownika</a></td>
+<td><a href="userSolutions?id=${user.id}">Poka¿ dane tego u¿ytkownika i jego rozwi±zania</a></td>
 </tr>
 </c:forEach>
 

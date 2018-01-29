@@ -12,8 +12,8 @@
 <h1>Panel administratora - grupy</h1>
 <table>
 <tr>
-<td>Nazwa grupy</td>
-<td>Akcje</td>
+<th>Nazwa grupy</th>
+<th colspan="2">Akcje</th>
 </tr>
 
 <c:forEach items="${groups}" var="group">

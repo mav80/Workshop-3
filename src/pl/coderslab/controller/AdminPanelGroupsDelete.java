@@ -39,11 +39,12 @@ public class AdminPanelGroupsDelete extends HttpServlet {
 			Connection conn = DbUtil.getConn();
 			UserGroup group = UserGroupDAO.loadGroupById(conn, id);
 			UserGroupDAO.groupDelete(conn, group);
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		response.sendRedirect("groups");
 		
 	}
